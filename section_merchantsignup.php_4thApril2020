@@ -1,0 +1,323 @@
+<?php
+
+  /*  
+  $partners=new partners;
+  $partners->connection($host,$user,$pass,$db);
+  */
+  #------------------------------------------------------------------------------
+  # opens terms file
+  # reads all contents
+  #------------------------------------------------------------------------------
+  $filename                = "admin/mer_terms.htm";
+  $fp                      = fopen($filename,'r');
+  $contents                = fread ($fp, filesize ($filename));
+  fclose($fp);
+  
+  # geting records from table
+  $sql  = " SELECT * FROM partners_paymentgateway WHERE pay_status LIKE 'Active' ";
+  $ret  = mysqli_query($con, $sql);
+  
+  # getting all currency from admin Panel
+  $crnysql  = " SELECT DISTINCT(currency_caption) FROM partners_currency ";
+  $crnyret  = mysqli_query($con, $crnysql) or die("You have an error while processing sql query ");
+  
+  
+  $msg    = $_GET['msg'];
+  $Action   = $_GET['Action'];
+
+   $err				 = $_GET['err'];
+  
+  if ($Action=="affiliate")     
+    $aff  = "selected = 'selected' ";
+  else                          
+    $mer  = "selected = 'selected' ";
+
+
+?>
+
+<!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+      <div id="join-now" class="pt-5 pb-5">
+        <!-- START THE FEATURETTES -->
+        <div class="container">
+
+          <div class="row featurette pb-5">
+            <div class="col-12 col-md-8">
+              <div class="signup-main">
+                <h4><?=$MerchantRegistration?></h4> 
+                <p class="mb-4">Our Affiliates will drive your sales!</p>
+
+                <form id="signup-affiliate" method="post" name="reg" action="new_reg_validate.php?mode=insert">
+             
+                  <?php
+                    if($msg != "")
+                    {
+                    	$alertClass = $err == "2" ? "alert-danger" : "alert-success";
+                  ?>
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <div class="alert <?=$alertClass?>" role="alert"><?=$msg?> </div>
+                    </div>
+                  </div>
+                  <?php
+                    }
+                  ?>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="first_name"><?=$lang_FirstName?></label> 
+                    <div class="col-9">
+                      <input id="firstnametxt" name="firstnametxt" placeholder="First Name" type="text" required="required" class="form-control here" value="<?=stripslashes($_GET['firstname'])?>">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="last_name"><?=$lang_LastName?></label> 
+                    <div class="col-9">
+                      <input id="lastnametxt" name="lastnametxt" placeholder="Last Name" type="text" required="required" class="form-control here" value="<?=stripslashes($_GET['lastname'])?>"">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="category"><?=$lang_Category?></label> 
+                    <div class="col-9">
+                      <select id="category" name="categorylst" class="custom-select" required="required">
+                        <option selected='selected' value="nill"><?=$selectacategory?></option>
+                        <?php
+                        $sql    = "SELECT * FROM partners_category";
+                        $result = mysqli_query($con, $sql);
+                        ?>
+                        <?php
+                        while($row=mysqli_fetch_object($result)){
+                          if($category==$row->cat_name){
+                        ?>
+                            <option value="<?=$row->cat_name?>" selected="selected" ><?=$row->cat_name?></option>
+                        <?php
+                          }
+                          else{
+                        ?>
+                            <option value="<?=$row->cat_name?>" ><?=$row->cat_name?></option>
+                        <?php
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="company"><?=$lang_Company?></label> 
+                    <div class="col-9">
+                      <input id="company" name="companytxt" size="20" value="<?=stripslashes($_GET['company']) ?>" placeholder="Company" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="url"><?=$lang_URL?></label> 
+                    <div class="col-9">
+                      <input id="url" name="urltxt" size="20" value="<?=stripslashes($_GET['url']) ?>" placeholder="URL" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="fax"><?=$lang_Fax?></label> 
+                    <div class="col-9">
+                      <input id="fax" name="faxtxt" size="20" value="<?=stripslashes($_GET['fax'])?>"  placeholder="<?=$lang_Fax?>" type="text" class="form-control here">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="phone"><?=$lang_Phone?></label> 
+                    <div class="col-9">
+                      <input id="phone" name="phonetxt" size="20" value="<?=stripslashes($_GET['phone'])?>" placeholder="Phone" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="email"><?=$lang_EmailId?></label> 
+                    <div class="col-9">
+                      <input id="email" name="emailidtxt" size="20" value="<?=stripslashes($_GET['mailid'])?>" placeholder="Email Address" type="text" required="required" class="form-control here">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="address"><?=$lang_Address?></label> 
+                    <div class="col-9">
+                      <textarea id="address" name="addresstxt"  cols="40" rows="3" class="form-control" required="required"><?=$_SESSION['MER_ADDRESS']?></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="zip-code"><?=$lang_zip?></label> 
+                    <div class="col-9">
+                      <input id="zip-code" name="ziptxt" size="20" value="<?=stripslashes($_GET['zip'])?>" placeholder="Zip/Post Code" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="city"><?=$lang_City?></label> 
+                    <div class="col-9">
+                      <input id="city" name="citytxt" size="20" value="<?=stripslashes($_GET['city'])?>" placeholder="City/Town" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="state"><?=$lang_state?></label> 
+                    <div class="col-9">
+                      <input id="state" name="statetxt" size="20" value="<?=stripslashes($_GET['state']) ?>" placeholder="State/County" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="country"><?=$lang_Country?></label> 
+                    <div class="col-9">
+                      <select id="country" name="countrylst" class="custom-select" required="required">
+                        <option value="nill" ><?=$lang_SelectaCountry?></option>
+                        <?php
+                          $sql    = "SELECT * FROM partners_country";
+                          $result = mysqli_query($con, $sql);
+                          ?>
+                          <?php
+                          while($row=mysqli_fetch_object($result)){
+                            if($country==$row->country_name){
+                          ?>
+                              <option value="<?=$row->country_name?>" selected ><?=$row->country_name?></option>
+                          <?php
+                            }
+                            else{
+                          ?>
+                              <option value="<?=$row->country_name?>" ><?=$row->country_name?></option>
+                          <?php
+                            }
+                          }
+                          ?>
+                      </select>
+                    </div>
+                  </div>
+                  
+                 
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_taxId?></label> 
+                    <div class="col-9">
+                      <input id="tax-id" name="taxIdtxt" size="20" value="<?=stripslashes($_GET['taxId']) ?>" placeholder="Tax/VAT Id" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="country"><?=$lang_Type?></label> 
+                    <div class="col-9">
+                      <select id="country" name="typelst" class="custom-select" required="required">
+                        <?
+                        if (trim($type)=="nill") {
+                          $nill = "selected = 'selected'";
+                        } 
+                        if (trim($type)==$lang_Advance) {
+                          $adv  = "selected = 'selected'";
+                        }
+                        if (trim($type)==$lang_Normal) {
+                          $nor  = "selected = 'selected'";
+                        }
+                        ?>
+                        <option value="nill" <?= ($type=="nill" ? "selected" : "" ) ?>><?=$selectatype?></option>
+                        <option value="normal"<?= ($type=="normal" ? "selected" : "" ) ?> ><?=$lang_Normal?></option>
+                        <option value="advance" <?= ($type=="advance" ? "selected" : "" ) ?> ><?=$lang_Advance?></option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row" style="display: none;">
+                    <label for="paymet-method" class="col-3 col-form-label"><?=$lang_Payment?></label> 
+                    <div class="col-9">
+                      <select id="paymet-method" name="modofpay" class="custom-select" aria-describedby="paymet-methodHelpBlock" required="required">
+                        <? //checking for each records
+                        $modofpay = "WireTransfer";
+                        if(mysqli_num_rows($ret)>0){
+                          while($row=mysqli_fetch_object($ret)){     
+                            if($modofpay==$row->pay_name) 
+                              $sel  = "selected = 'selected'";
+                            else 
+                              $sel  = "";
+                        ?>
+                          <option  <?=$sel?>  value="<?=$row->pay_name?>"><?=$row->pay_name?></option>
+                        <?
+                          }
+                        }  
+                        ?>
+                      </select> 
+                      <span id="paymet-methodHelpBlock" class="form-text text-muted">* All Fields Are Required</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$merreg_method?></label> 
+                    <div class="col-9">
+                      <input name="merchant_isInvoice" type="checkbox" value="Yes" class="bdrless" <?php echo ($merchant_isInvoice=="Yes")?"checked='checked'":"" ?> /> &nbsp;&nbsp;<?=$merreg_pay?>
+                    </div>
+                  </div>
+
+                  <div class="form-group row" style="display: none;">
+                    <label for="paymet-method" class="col-3 col-form-label"><?=$lang_merchant_currency?> </label> 
+                    <div class="col-9">
+                      <select id="paymet-method" name="merchant_currency" class="custom-select" >
+                        <?
+                        # POPULATE currency
+                        
+                        if(mysqli_num_rows($crnyret)>0){
+                          while($crnyrow = mysqli_fetch_object($crnyret)){
+                        ?>
+                        <option value="<?=$crnyrow->currency_caption?>" <?=($crnyrow->currency_id==$merchant_currency)?"selected='selected'":""?>><?=trim(stripslashes($crnyrow->currency_caption))?></option>
+                        <?
+                          }
+                        }
+                        ?>
+                      </select> 
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-3"></div> 
+                    <div class="col-9">
+                        <textarea name="termsCondn" class="form-control" cols="40" rows="5"><?=stripslashes($contents)?></textarea>
+                    </div>
+                  </div> 
+                  
+                  <div class="form-group row">
+                    <div class="col-3"></div> 
+                    <div class="col-9">
+                      <label class="custom-control custom-checkbox">
+                        <input name="terms" type="checkbox" value="1" > 
+                        <span class="custom-control-description"><?=$lang_terms?></span>
+                      </label>
+                    </div>
+                  </div> 
+					<!-- Google reCAPTCHA box -->
+				   <div class="form-group row">
+						<div class="col-3"></div> 
+						<div class="col-9">
+							<div class="g-recaptcha" data-sitekey="6Ledla0UAAAAAKY5-lyNIrbfiE1O71JwzJ2xyrED"></div>
+						</div>
+					</div>
+                  <div class="form-group row">
+                    <div class="offset-3 col-9">
+                      <button  name="B1" type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="signup-sidebar">
+                <h4>WHY JOIN?</h4> 
+                  <ul class="mt-3">
+                    <li><?php echo $benefitlist1;?></li>
+                    <li><?php echo $benefitlist2;?></li>
+                    <li><?php echo $benefitlist3;?></li>
+                    <li><?php echo $benefitlist4;?></li>
+                    <li><?php echo $benefitlist5;?></li>
+                    <li><?php echo $benefitlist6;?></li>
+                    <li><?php echo $benefitlist7;?></li>
+                    <li><?php echo $benefitlist8;?></li>
+                    <li><?php echo $benefitlist9;?></li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

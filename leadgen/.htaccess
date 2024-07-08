@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://avaz.co.uk/leadgen/$1 [R,L]
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^([^/]+)/?$ index.php?slug=$1 [L]

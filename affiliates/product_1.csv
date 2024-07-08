@@ -1,0 +1,2 @@
+ArtNumber, Title, Description_short, DisplayPrice, Img_url, DeepLink1, ProductCategoryID, ProductCategoryName 
+"ArtNumber","Title","Description_short",0,http://192.168.0.111/open/newipartners/trackingcode.php?aid=1&linkid=R23&type=1,http://192.168.0.111/open/newipartners/trackingcode.php?aid=1&linkid=R23&type=2,"ProductCategoryID","ProductCategoryName"

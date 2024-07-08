@@ -1,0 +1,259 @@
+
+body{
+    font-family: 'Poppins', sans-serif !important;
+}
+header {
+    background: #fff;
+    box-shadow: 0px 0px 12px 0px #ddd;
+}
+.logo-section-main {
+     padding: 6px;
+}
+.logo-section-main {
+    text-align: center;
+}
+.logo-section-main img {
+       width: 76%;
+    object-fit: contain;
+}
+section.PerAff_partner_info {
+    padding: 25px 0;
+}
+.PerAff_ethical-text h2 {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 600;
+}
+.divider-title {
+    height: 2px;
+    display: block;
+    width: 100px;
+    margin: 6px auto 15px;
+    position: relative;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.divider-title span.span-1 {
+    height: 2px;
+    width: 70px;
+    position: absolute;
+    bottom: -4px;
+    display: block;
+    content: "";
+    z-index: 1;
+    width: 70px;
+    left: 15px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.PerAff_ethical-text p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 0px;
+}
+.search {
+    background: #fff;
+    position: relative;
+    bottom: 20px;
+    padding: 25px 30px;
+    box-shadow: -1px 1px 4px 0px #50505052;
+    box-shadow: -1px 1px 20px 0px #50505052;
+}
+input#search-bar {
+    margin: 0 auto;
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 16px;
+    border: 1px solid #D0CFCE;
+    outline: none;
+}
+.search-icon {
+    position: relative;
+    float: right;
+    top: -45px;
+    right: 0px;
+    background: #000;
+    color: #fff;
+    width: 60px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-icon .fa-search {
+    color: #fff !important;
+}
+.view-text h4 {
+    font-size: 22px;
+}
+.view-text p {
+    font-size: 14px;
+}
+.PerAff-btn-view:hover {
+    color: #2c4802;
+    box-shadow: 0px 0px 10px #ffd200;
+    transform: scale(1.0880, 1.0880);
+}
+.PerAff-btn-view {
+    color: #fff !important;
+     /* background: #124197  !important; */
+    background: #000;
+    border-radius: 42px !important;
+    font-size: 15px !important;
+    padding: 8px 21px !important;
+}
+
+
+/* offer section */
+
+.partner-name {
+    background: #f1f1f1;
+    padding: 21px 0px;
+    margin-top: 20px;
+}
+.partner-card:hover {
+    box-shadow: 0px 0px 15px 0px #9d9b9b;
+    transform: scale(1.0880, 1.0880);
+}
+.partner-card {
+    background-color: #fff;
+    border-radius: 12px;
+    text-align: center;
+    padding: 24px 10px;
+    margin: 13px 0px;
+    /* border: 1px solid #e7e7e7; */
+    transition: all 400ms ease-in-out;
+    position: relative;
+}
+.partner-card strong {
+    color: #124197 !important;
+}
+span.off {
+    background: #000;
+    color: #fff;
+    padding: 3px 16px;
+    border-radius: 12px 0 0;
+    font-size: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+}
+.partner-card img {
+    width: 100px;
+    margin-bottom: 13px;
+    margin-top: 40px;
+}
+.PerAffpartner-img {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+button.btn.btn-outline-chashback{
+    font-size: 10px;
+    color: #2c4802;
+    border: 1px solid #e5e5e5;
+    border: 1px solid #e5e5e570;
+    margin: 8px 0px 6px;
+    padding: 8px 16px;
+}
+.PerAffterms {
+    color: #000;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* single brand product */
+
+.PerAff_products-card {
+    background: #fafafa;
+    padding: 15px;
+    border: 1px solid #efefef;
+}
+.PerAff_ethical-text a.btn.btn-danger {
+    background: #124197;
+    border: #124197;
+    border-radius: 82px;
+    font-size: 13px;
+    padding: 8px 30px;
+}
+
+.PerAff_descript-brand {
+    padding: 13px;
+    background: #fff;
+    box-shadow: 0px 0px 12px 0px #ddd;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #000;
+}
+.PerAff_descript-brand h4 {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    color: #124197;
+}
+section.PerAff_partner_info.PerAff_single-info-page {
+    background: #fafafa;
+    padding: 90px 0;
+}
+
+.ftr-wedget {
+    background-color: #124197;
+    padding: 25px 0px;
+    text-align: center;
+    border-bottom: 1px solid #706d6d;
+}
+.ftr-text {
+    color: #fff;
+    font-size: 17px;
+    line-height: normal;
+    font-weight: normal;
+}
+.btnchrome {
+    background-color: #ffb100 !important;
+    font-size: 14px !important;
+    font-weight: 600;
+    border-radius: 50px !important;
+}
+.nav-links a {
+    padding: 13px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+.nav-links {
+    text-align: right;
+    padding: 31px 0;
+}
+footer {
+    background: #124197;
+    padding: 12px 0;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+}
+
+@media(max-width:600px)
+{
+    .PerAff_ads-img img {
+    width: 100%;
+}
+.logo-section-main img
+{
+    width:45%;
+    padding-bottom:20px;
+}
+div#livesearch {
+    text-align: center !important;
+}
+.view-btn.text-end {
+    text-align: center !important;
+}
+}

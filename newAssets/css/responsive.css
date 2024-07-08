@@ -1,0 +1,149 @@
+@media (min-width: 993px)
+{
+
+}
+@media (max-width: 992px) {
+    .navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    align-items: center;
+    background: #e5e5e5;
+    color: black;
+    /* text-align: center; */
+    border-radius: 50px 0px 50px 0px;
+    padding: 20px 30px;
+}
+.nav-item-cus {
+    padding-bottom: 4px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #c3c3c3;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(0 0 0);
+    font-size: 13px;
+    font-weight: 500;
+}
+.nav-btn {
+    display:flex;
+    justify-content: center;
+}
+
+
+
+
+    
+    
+    
+.contact-info-text h3 {
+    font-weight: 600;
+    color: #000;
+    text-transform: capitalize;
+    font-size: 16px;
+    margin-bottom: 0px;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.contact-info-text p {
+    color: #555;
+    font-size: 13px;
+}
+.contact-info-icon {
+    width: 50px;
+    height: 50px;
+    line-height: 51px;
+    margin-right: 10px;
+    background: rgba(255, 255, 255, 0.75) none repeat scroll 0 0;
+    border-radius: 10px;
+    -webkit-transform: rotate(
+42deg
+);
+    transform: rotate(
+42deg
+);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 18px;
+    color: #000;
+}
+.left-text-content {
+    display:flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.social-icons{
+  justify-content: center;
+}
+}
+@media (mix-width: 993px)
+.social-icons{
+   justify-content: center !mportant;
+}
+    .as-standar-txt {
+    text-align: center;
+}
+.contact-info-text h3 {
+    font-weight: 600;
+    color: #000;
+    text-transform: capitalize;
+    font-size: 16px;
+    margin-bottom: 0px;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+/* For Mobile and tablet */
+
+
+@media screen and (max-width: 768px) {
+    
+    .banner {border-bottom-right-radius: 0px;
+}
+    .pelum-video-area {
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+    .trusted-By-Brands {
+    background: #333;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+section.Features.py-80:after {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    background: rgb(247 147 30 / 30%);
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    border-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    animation: mymove 5s infinite alternate;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+       button.navbar-toggler {
+        background: #ffffff;
+        color: #fff;
+        padding: 4px 11px;
+            z-index: 9;
+    }
+    .as-standar-txt {
+    text-align: center;
+}
+
+
+
+
+
+}

@@ -1,0 +1,572 @@
+<?php	
+
+include_once 'includes/db-connect.php';
+
+#-------------------------------------------------------------------------------
+# Affilaite Registration Page
+# Payment Gateways supported Are
+# Paypal, Authorize.net, StormPay, eGold, check by mail, wire Transfer, Neteller
+
+# Pgmmr        : RR
+# Date Created :   28-10-2004
+# Date Modfd   :   29-10-2004
+# Last Modified:   DPT on May/17/05 to add quotes to all value attributes on form
+# Last Modified:   DPT on May/28/05 to fix issues with HTML tags
+#-------------------------------------------------------------------------------
+
+//Getiing Referer Affiliate Id if any
+	$referer 	= $_REQUEST['referer'];
+	if(!empty($referer))
+	{
+		$_SESSION['AFFILIATE_REFERER_ID'] = $referer;
+	}
+# geting all payments gateways supported
+# and its associated parametrs
+  $sql ="select * from partners_paymentgateway where pay_status like 'Active' and pay_name NOT LIKE 'WorldPay'";
+  $ret =mysqli_query($con, $sql);
+
+# getting back form variable
+
+# Err mgs
+    $msg                 = trim(stripslashes($_GET['msg']));
+    $issuccess                 = trim(stripslashes($_GET['success']));
+
+    $err				 = $_GET['err'];
+# Personal Information
+    $firstname           = stripslashes($_GET['firstname']);
+    $lastname            = stripslashes($_GET['lastname']);
+    $company             = stripslashes($_GET['company']);
+    $url                 = stripslashes($_GET['url']);
+    $address             = stripslashes($_GET['address']);
+    $city                = stripslashes($_GET['city']);
+    $category            = stripslashes($_GET['category']);
+    $phone               = stripslashes($_GET['phone']);
+    $fax                 = stripslashes($_GET['fax']);
+    $mailid              = stripslashes($_GET['mailid']);
+    $country             = stripslashes($_GET['country']);
+    //$address             = stripslashes($_GET['address']);
+	$address             = $_SESSION['AFF_ADDRESS'];
+    $minimumcheck        = stripslashes($_GET['minmumcheck']);
+    $affiliateid         = intval(stripslashes($_GET['affiliateid']));
+    $modofpay            = stripslashes($_GET['modofpay']);
+   	$taxIdtxt            = stripslashes(trim($_GET['taxIdtxt']));
+	
+	$currency			= stripslashes(trim($_REQUEST['currency']));   
+
+  if($err=='2'){
+     $paymodes            = explode("`~`",$_SESSION['PAYMODE']);
+
+
+# paypal email
+   	$payapalemail     	  =   $paymodes[0];
+
+# storm pay email
+    $stormmail       = $paymodes[1];
+
+# egold information
+    $payeename        = $paymodes[2];
+    $acno             = $paymodes[3];
+
+# checkout information
+    $productid        = $paymodes[4];
+
+    $checkoutid       = $paymodes[5];
+
+# authorize.net information.
+    $version          = $paymodes[6];
+
+    $delimdata        = $paymodes[7];
+
+    $relayresponse    = $paymodes[8];
+
+    $login            = $paymodes[9];
+
+    $trankey          = $paymodes[10];
+
+    $cctype           = $paymodes[11];
+
+
+#-------------------------------------------------------------------------
+# Aditional informations added
+#-------------------------------------------------------------------------
+    $zipcode            = $paymodes[12];
+
+    $state              = $paymodes[13];
+
+
+    $timezone       	= $paymodes[14];
+
+
+
+# Neteller account
+    $neteller_email 	= $paymodes[15];
+
+    $neteller_accnt	 	= $paymodes[16];
+
+
+# check by Mail
+    $checkpayee     	= $paymodes[17];
+
+    $checkcurr      	= $paymodes[18];
+
+
+
+# Wire Transfer
+    $wire_AccountName   = $paymodes[19];
+
+    $wire_AccountNumber = $paymodes[20];
+
+    $wire_BankName      = $paymodes[21];
+
+    $wire_BankAddress   = $paymodes[22];
+
+    $wire_BankCity      = $paymodes[23];
+
+    $wire_BankState     = $paymodes[24];
+
+    $wire_BankZip       = $paymodes[25];
+
+    $wire_BankCountry   = $paymodes[26];
+
+    $wire_BankAddressNumber= $paymodes[27];
+
+    $wire_Nominate      = $paymodes[28];
+
+
+      if($relayresponse=="True")          $relayresponseselected1 = "selected = 'selected'";
+      else                                $relayresponseselected2 = "selected = 'selected'";
+      if($delimdata=="True")              $delimdataselected1     = "selected = 'selected'";
+      else                                $delimdataselected2     = "selected = 'selected'";
+      if($cctype=="AUTH_CAPTURE")         $cctypesel1             = "selected = 'selected'" ;
+      if($cctype=="AUTH_ONLY")            $cctypesel2             = "selected = 'selected'" ;
+      if($cctype=="CAPTURE_ONLY")         $cctypesel3             = "selected = 'selected'" ;
+      if($cctype=="CREDIT")               $cctypesel4             = "selected = 'selected'" ;
+      if($cctype=="VOID")                 $cctypesel5             = "selected = 'selected'" ;
+      if($cctype=="PRIOR_AUTH_CAPTURE")   $cctypesel6             = "selected = 'selected'" ;
+
+
+   }
+    $bankno               = stripslashes($_GET['bankno']);
+    $bankname             = stripslashes($_GET['bankname']);
+    $bankemail            = stripslashes($_GET['bankemail']);
+    $bankaccount          = stripslashes($_GET['bankaccount']);
+    $payableto            = stripslashes($_GET['payableto']);
+
+
+#-------------------------------------------------------------------------
+# Aditional informations added
+#-------------------------------------------------------------------------
+        $zipcode        = trim(stripslashes($_GET['zipcode']));
+        $state          = trim(stripslashes($_GET['state']));
+        $timezone       = trim(stripslashes($_GET['timezone']));
+        $j=-12;
+        for($i=0 ;$i<=24 ;$i++)
+    		{
+     		if($timezone==$j) $sel[$i] ="selected = 'selected'" ;
+     		else  $sel[$i] =" " ;
+     		$j++;
+       }
+#-------------------------------------------------------------------------
+# Aditional informations added Ends Here
+#-------------------------------------------------------------------------
+
+
+         $filename                = "admin/terms.htm";
+  $fp                      = fopen($filename,'r');
+  $contents                = fread ($fp, filesize ($filename));
+  fclose($fp);
+
+
+?>
+
+
+ <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+      <div id="join-now" class="pt-5 pb-5">
+        <!-- START THE FEATURETTES -->
+        <div class="container">
+
+          <div class="row featurette pb-5">
+            <div class="col-12 col-md-8">
+              <div class="signup-main">
+                <h4><?=$lang_AffiliateRegistration?></h4> 
+                <p class="mb-4">Sign up for free. Then place our offers on your website, email list or any other traffic source and start earning!</p>
+
+                <form id="signup-affiliate" class="" method="post" name="reg" action="new_affil_reg_validate.php?mode=insert" >
+                	<?php
+                    if($msg != "")
+                    {
+                    	$alertClass = $err == "2" ? "alert-danger" : "alert-success";
+                  ?>
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <div class="alert <?=$alertClass?>" role="alert"><?=$msg?> </div>
+                    </div>
+                  </div>
+                  <?php
+                    }
+                  ?>
+
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="first_name"><?=$lang_firstname?></label> 
+                    <div class="col-9">
+                      <input id="first_name" name="firstnametxt" value="<?=$firstname?>" placeholder="First Name" type="text" required="required" class="form-control here">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="last_name"><?=$lang_Last?></label> 
+                    <div class="col-9">
+                      <input id="last_name"  name="lastnametxt" size="20" value="<?=$lastname?>" placeholder="Last Name" type="text" required="required" class="form-control here">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="email"><?=$lang_EmailId?></label> 
+                    <div class="col-9">
+                      <input id="email" name="emailidtxt" size="20" value="<?=$mailid?>" placeholder="Email Address" type="text" required="required" class="form-control here">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="phone"><?=$lang_Phone?></label> 
+                    <div class="col-9">
+                      <input id="phone" name="phonetxt" size="20" value="<?=$phone?>" placeholder="Phone" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="fax"><?=$lang_Fax?></label> 
+                    <div class="col-9">
+                      <input id="fax" name="faxtxt" size="20" value="<?=$fax?>" placeholder="<?=$lang_Fax?>" type="text" class="form-control here">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="company"><?=$lang_Company?></label> 
+                    <div class="col-9">
+                      <input id="company" name="companytxt" size="20" value="<?=$company?>" placeholder="Company" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="url"><?=$lang_URL?></label> 
+                    <div class="col-9">
+                      <input id="url" name="urltxt" size="20" value="<?=$url?>" placeholder="URL" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="address"><?=$lang_Address?></label> 
+                    <div class="col-9">
+                      <textarea id="address" name="addresstxt" cols="40" rows="3" class="form-control" required="required"><?=$address ?></textarea>
+                    </div>
+                  </div>
+                   <div class="form-group row">
+                    <label class="col-3 col-form-label" for="city"><?=$lang_City?></label> 
+                    <div class="col-9">
+                      <input id="city" name="citytxt" size="20" value="<?=$city?>" placeholder="City/Town" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="state"><?=$lang_state?></label> 
+                    <div class="col-9">
+                      <input id="state" name="state" size="20" value="<?=$state?>" placeholder="State/County" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="country"><?=$lang_Country?></label> 
+                    <div class="col-9">
+                      <select id="country" name="countrylst" class="custom-select" required="required">
+                        <option value="nill" ><?=$lang_SelectaCountry?></option>
+						<?php
+					        # getting all country from the table
+					        $sql    = "select * from partners_country";
+					        $result = mysqli_query($con, $sql);
+					        while($row=mysqli_fetch_object($result))
+					        {
+					           if($country==$row->country_name)
+					           {
+					           ?>
+					            	<option value="<?=$row->country_name?>" selected='selected' >
+					            	<?=$row->country_name?>
+					            	</option>
+					            	<?php
+					           }
+					           else
+					           {
+					           ?>
+					            	<option value="<?=$row->country_name?>" >
+					            	<?=$row->country_name?>
+					            	</option>
+					            	<?php
+					             }
+					        }
+					       ?>
+
+                      </select>
+                    </div>
+                  </div>
+                 
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="zip-code"><?=$lang_zip?></label> 
+                    <div class="col-9">
+                      <input id="zip-code" name="zipcode" size="20" value="<?=$zipcode?>" placeholder="Zip/Post Code" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_taxId?></label> 
+                    <div class="col-9">
+                      <input id="tax-id" name="taxIdtxt" size="20" value="<?=$taxIdtxt?>" placeholder="Tax/VAT Id" type="text" class="form-control here" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="timezone"><?=$lang_timezone?></label> 
+                    <div class="col-9">
+                      <select id="timezone" name="timezone" class="custom-select" required="required">
+                        <option <?=$sel[0]?>  	value="-12">Newzealand Time(-12)</option>
+		            	<option <?=$sel[1]?>	value="-11">Midway Isles, Samoa (-11)</option>
+		            	<option <?=$sel[2]?>	value="-10">Hawaii (-10)</option>
+		            	<option <?=$sel[3]?>	value="-9">AKST - Alaska Standard Time(-9)</option>
+		            	<option <?=$sel[4]?>	value="-8">PST - Pacific Standard Time(-8)</option>
+		            	<option <?=$sel[5]?>	value="-7">MST - Mountain Standard Time(-7)</option>
+		            	<option <?=$sel[6]?>	value="-6">CST - Central Standard Time(-6)</option>
+		            	<option <?=$sel[7]?>	value="-5">EST - Eastern Standard Time(-5)</option>
+		            	<option <?=$sel[8]?>	value="-4">SA West - Atlantic Time(-4)</option>
+		            	<option <?=$sel[9]?>	value="-3">SA East - East Brasil Time (-3)</option>
+		            	<option <?=$sel[10]?>	value="-2">Middle Atlantic (-2)</option>
+		            	<option <?=$sel[11]?>	value="-1">Island Time (-1)</option>
+		            	<option <?=$sel[12]?>	value="0">GMT - Greenwitch Meridian Time (0)</option>
+		            	<option <?=$sel[13]?>	value="1">CET - Central European Time (+1)</option>
+		            	<option <?=$sel[14]?>	value="2" >EET - East European Time (+2)</option>
+		            	<option <?=$sel[15]?>	value="3">Irak, Kuwait, Russia(+3)</option>
+		            	<option <?=$sel[16]?>	value="4">Mauritius, Kazachstan (+4)</option>
+		            	<option <?=$sel[17]?>	value="5">West Asia (+5)</option>
+		            	<option <?=$sel[18]?>	value="6">Central Asia (+6)</option>
+		            	<option <?=$sel[19]?>	value="7">Indo China Time (+7)</option>
+		            	<option <?=$sel[20]?>	value="8">Chinese Shore Time (+8)</option>
+		            	<option <?=$sel[21]?>	value="9">JST - Japan Standard Time (+9)</option>
+		            	<option <?=$sel[22]?>	value="10">AUS - Australian Time(+10)</option>
+		            	<option <?=$sel[23]?>	value="11">Central Pacifik (+11)</option>
+		            	<option <?=$sel[24]?>	value="12">Newzealand Time (12)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label" for="category"><?=$lang_Category?></label> 
+                    <div class="col-9">
+                      <select id="category" name="categorylst" class="custom-select" required="required">
+                        <option selected='selected' value="nill"><?=$lang_category?></option>
+                        <?php
+				           # getting all categories available
+				             $sql    = "select * from partners_category";
+				             $result = mysqli_query($con, $sql);
+				             while($row=mysqli_fetch_object($result)){
+					                if($category==$row->cat_name) 
+					                {
+					                ?>
+					            	<option value=<?=$row->cat_name?> selected='selected' >
+					            	<?=$row->cat_name?>
+					            	</option>
+					       <?php
+					                }
+					                else
+					                {
+					                ?>
+					            	<option value="<?=$row->cat_name?>" >
+					            	<?=$row->cat_name?>
+					            	</option>
+					       <?php
+					               }
+						       }
+				         ?>
+
+                      </select>
+                    </div>
+                  </div>
+					<?php
+						$refAfId = $_SESSION['AFFILIATE_REFERER_ID'] ;
+						$sql    = "SELECT affiliate_id, affiliate_firstname, affiliate_lastname FROM `partners_affiliate`WHERE affiliate_id = '$refAfId' ";
+						$result = mysqli_query($con, $sql);
+						if(mysqli_num_rows($result) > 0)
+						{
+						 	$row=mysqli_fetch_object($result);
+							$refAffFirstName = ucwords(stripslashes($row->affiliate_firstname));
+							$refAffLastname = ucwords(stripslashes($row->affiliate_lastname));
+					?>
+					   	<div class="form-group row">
+		                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_ParentID?></label> 
+		                    <div class="col-9">
+		                      <?=$refAffFirstName." ".$refAffLastname?>
+		                    </div>
+		                  </div>
+					<?php
+						}
+					?>
+
+                  <div class="form-group row">
+                    <label for="paymet-method" class="col-3 col-form-label"><?=$lang_PaymentGateway?></label> 
+                    <div class="col-9">
+                      <select onchange="getpayment()" id="drpPaymetMethod" name="modofpay"  class="custom-select" aria-describedby="paymet-methodHelpBlock" required="required">
+                        <?//checking for each records
+			               if(mysqli_num_rows($ret)>0)
+			               {
+			                       while($row= mysqli_fetch_object($ret))
+			                       {     if($modofpay==$row->pay_name) $sel="selected = 'selected'";
+			                             else                          $sel ="";
+			                             ?>
+			                               <option value="<?=$row->pay_name?>" <?=$sel?>><?=$row->pay_name?> </option>
+			                              <?
+			                       }
+			               }  ?>
+                      </select> 
+                      <span id="paymet-methodHelpBlock" class="form-text text-muted">* All Fields Are Required</span>
+                    </div>
+                  </div>
+<!--
+                  <div class="form-group row checkbymail modeofpayment">
+                    <label class="col-12 col-form-label" ><?=$lang_check_caption?></label> 
+                  </div>
+                  <div class="form-group row checkbymail modeofpayment">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_check_payee?></label> 
+                    <div class="col-9">
+                      <input type='text' name='checkpayee' size='20' value='<?=$checkpayee?>' />
+                    </div>
+                  </div>
+                  <div class="form-group row checkbymail modeofpayment">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_check_curr?></label> 
+                    <div class="col-9">
+                      <input type='text' name='checkcurr' size='20' value='<?=$checkcurr?>'  />
+                    </div>
+                  </div>
+                -->
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-12 col-form-label" ><?=$lang_wire_caption?></label> 
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_AccountName?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_AccountName' size='20' value='<?=$wire_AccountName?>' />
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_AccountNumber?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_AccountNumber' size='20' value='<?=$wire_AccountNumber?>'  />
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_BankName?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_BankName' size='20' value='<?=$wire_BankName?>'   />
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_BankAddress?></label> 
+                    <div class="col-9">
+                      <textarea name='wire_BankAddress' rows='5' cols='27'><?=$wire_BankAddress?></textarea> 
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_BankCity?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_BankCity' size='20' value='<?=$wire_BankCity?>'   />
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_BankState?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_BankState' size='20' value='<?=$wire_BankState?>'   />
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_BankZip?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_BankZip' size='20' value='<?=$wire_BankZip?>'   />
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_BankCountry?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_BankCountry' size='20' value='<?=$wire_BankCountry?>'   />
+                    </div>
+                  </div>
+
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_BankAddressNumber?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_BankAddressNumber' size='20' value='<?=$wire_BankAddressNumber?>'   />
+                    </div>
+                  </div>
+                  <div class="form-group row wiretransfer modeofpayment" style="display: none;">
+                    <label class="col-3 col-form-label" for="tax-id"><?=$lang_wire_Nominate?></label> 
+                    <div class="col-9">
+                      <input type='text' name='wire_Nominate' size='20' value='<?=$wire_Nominate?>'   />
+                    </div>
+                  </div>
+
+                   <div class="form-group row">
+                    <div class="col-3"></div> 
+                    <div class="col-9">
+                        <textarea name="termsCondn" class="form-control" cols="40" rows="5"><?=stripslashes($contents)?></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-3"></div> 
+                    <div class="col-9">
+                      <label class="custom-control custom-checkbox">
+                        <input name="terms" type="checkbox" class="" value="1" required="required"> 
+                        <span class="custom-control-description"><?=$lang_terms_condn?></span>
+                      </label>
+                    </div>
+                  </div> 
+				   <!-- Google reCAPTCHA box -->
+				   <div class="form-group row">
+						<div class="col-3"></div> 
+						<div class="col-9">
+							<div class="g-recaptcha" data-sitekey="6Ledla0UAAAAAKY5-lyNIrbfiE1O71JwzJ2xyrED"></div>
+						</div>
+					</div>
+                  <div class="form-group row">
+                    <div class="offset-3 col-9">
+                      <button  value="Register" name="B1" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="signup-sidebar">
+                <h4>WHY JOIN?</h4> 
+                  <ul class="mt-3">
+                    <li><?php echo $afffeaturelist1;?></li>
+                    <li><?php echo $afffeaturelist2;?></li>
+                    <li><?php echo $afffeaturelist3;?></li>
+                    <li><?php echo $afffeaturelist4;?></li>
+                    <li><?php echo $afffeaturelist5;?></li>
+                    <li><?php echo $afffeaturelist6;?></li>
+                    <li><?php echo $afffeaturelist7;?></li>
+                    <li><?php echo $afffeaturelist8;?></li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+      	
+		function getpayment(){
+
+			var paymentMethod = $("#drpPaymetMethod").val();
+
+			$(".modeofpayment").hide();
+			$("."+paymentMethod.toLowerCase()).show();
+
+		}
+
+      </script>

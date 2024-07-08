@@ -1,0 +1,68 @@
+<?php   global $con;
+//$MERCHANTID   =$_SESSION['MERCHANTID'];  
+?> 
+<div class="card strpied-tabled-with-hover">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12">
+					<?php
+				if(isset($_SESSION['successcoupon'])){
+					?>
+					<p class="alert alert-success"><?php echo $_SESSION['successcoupon']; ?></p>
+					<?php
+					unset($_SESSION['successcoupon']);
+				}else if(isset($_SESSION['faliurecoupon'])){
+					?>
+					<p class="alert alert-danger"><?php echo $_SESSION['faliurecoupon']; ?></p>
+					<?php
+					unset($_SESSION['faliurecoupon']);
+				}
+			?>
+						<div class="table-full-width table-responsive">
+							<table class="table table-hover table-striped coupon_table">
+								<thead> 
+									<tr>
+										<th><?=$coupon_Name?></th>
+										<th><?=$Merchant_name?></th>
+										<th><?=$coupon_Coupon?></th>
+										<th><?=$coupon_valid_from?></th>
+										<th><?=$coupon_valid_to?></th>
+										<th></th>
+									
+									</tr>
+								</thead>
+								<tbody>
+								<?php
+								$sql = mysqli_query($con,"select * from affilate_coupon order by date DESC");
+								while($row = mysqli_fetch_array($sql)){
+									$merchant_id = $row['merchant_id'];
+									$sqlm = mysqli_query($con,"select * from partners_merchant where merchant_id = '$merchant_id'");
+									$rowm = mysqli_fetch_array($sqlm)
+									
+								?>
+								<tr>
+									<td><?php echo $row['name']; ?></td>
+									<td ><?php echo $rowm['merchant_company']; ?></td>
+									<td ><?php echo $row['coupon']; ?></td>
+									<td><?php echo $row['valid_from']; ?></td>
+									<td><?php echo $row['valid_to']; ?></td>
+									<td class="popup_effect">
+									<i class="nc-icon nc-zoom-split icon-bold"></i>
+									<div class="popup_hover affiliate_popuphover">   
+										<div class="popup_desc">  
+											<div class="req_mockup">
+												<p><?php echo $row['coupon_detail']; ?></p>
+											</div> 	
+										</div>
+									</div>
+									</td>
+								
+								</tr>
+								<?php } ?>
+								</tbody>
+							</table>
+						</div>
+					</div> 
+				</div> 
+			</div> 
+		</div>

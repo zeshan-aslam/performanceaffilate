@@ -1,0 +1,99 @@
+<?php
+
+	include_once '../includes/db-connect.php';
+	include_once '../includes/session.php';
+	header("Cache-control: private"); 
+	include_once '../includes/constants.php';
+	include_once '../includes/functions.php';
+	include_once '../includes/function1.php';
+	include '../includes/allstripslashes.php';
+	
+	$Act	= $_GET['Act'];
+	
+	//if(!empty(intval($_POST['languageid']))) 
+	if(!empty($_POST['languageid'])) 
+		$_SESSION['LANGUAGE'] = intval($_POST['languageid']);
+	$language	= $_SESSION['LANGUAGE'];
+	
+	$partners	= new partners;
+	$partners->connection($host,$user,$pass,$db);
+	
+	if(!$partners->isMerchantlogin()){
+		header("Location:../index.php?Act=merchant");
+		exit;
+	}
+
+    $MERCHANTID = $mid 	= $_SESSION['MERCHANTID'] ;
+
+    $sql_merchant	=	"select * from merchant_pay where pay_merchantid='$mid'  ";
+    $ret_merchant	=	@mysqli_query($con,$sql_merchant);
+    $row_merchant	=	@mysqli_fetch_object($ret_merchant);
+
+    # get currency values
+    $currSql 	= " SELECT * FROM partners_currency, partners_merchant 
+					WHERE merchant_id = '$mid' and currency_caption = merchant_currency";
+    $currRet 	= @mysqli_query($con,$currSql);
+
+    if(@mysqli_num_rows($currRet)>0){
+     	$currRow 	= @mysqli_fetch_object($currRet);
+        $currSymbol = stripslashes($currRow->currency_symbol);
+        $currValue 	= stripslashes($currRow->currency_caption);
+		$currCode 	= stripslashes($currRow->currency_code);
+    }
+    $_SESSION['MERCHANTBALANCE'] = $row_merchant->pay_amount;
+
+	# Added for base Currency
+	$cur_sql 	= "SELECT * FROM partners_currency WHERE currency_code='$default_currency_code' ";
+	$res_cur 	= mysqli_query($con,$cur_sql);
+	if(mysqli_num_rows($res_cur) > 0){
+		$row_cur = mysqli_fetch_object($res_cur);
+		$basecurrSymbol = stripslashes($row_cur->currency_symbol);
+		$_SESSION['DEFAULTCURRENCYSYMBOL'] = $basecurrSymbol;
+	}
+
+    $date 	= date("Y-m-d");
+
+    if($currValue != $default_currency_caption)
+    {
+		$currBalance = getCurrencyValue($date, $currValue, $row_merchant->pay_amount);
+    }
+
+    include 'language_include.php';
+
+$welcomeflag = 0; 	
+if(isset($_SESSION['show_message'])){
+	$welcomeflag = 1; 
+	unset($_SESSION['show_message']);
+}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Searlco Affiliate Network</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<!-- CSS Files -->
+<link href="../public/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../public/assets/css/light-bootstrap-dashboard.css.css" rel="stylesheet" />
+<link href="../public/assets/css/demo.css" rel="stylesheet" />
+<!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
+<script>var is_show_welcome = '<?php echo $welcomeflag; ?>'; </script>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Sidebar -->
+		<?php	include 'merchants_sidebar.php';?>
+		 <div class="main-panel">
+			<!-- Start Navbar -->
+			<?php	include 'merchants_header.php';?>
+			 <!-- End Navbar -->
+			<div class="content">
+				<?php include "process.php";?> 
+			</div>
+			<?php include "footer.php";?>
+		 </div>
+	</div>
+</body>
+</html>

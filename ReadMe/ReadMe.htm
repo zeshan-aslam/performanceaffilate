@@ -1,0 +1,706 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>AlstraSoft Affiliate Network Pro v8.0 Software Documentation</title>
+<style>
+<!--
+P {
+ text-align:justify;
+ margin-bottom:30px;
+ margin-top:0px;
+ margin-right:0px;
+ margin-left:12px;
+ text-indent:0px;
+ direction:ltr
+}
+H1 {
+ text-align:left;
+ margin-bottom:30px;
+ margin-top:0px;
+ margin-right:71px;
+ margin-left:0px;
+ text-indent:72px;
+ direction:ltr;
+ line-height:52px
+}
+H2 {
+ text-align:justify;
+ margin-bottom:25px;
+ margin-top:0px;
+ margin-right:0px;
+ margin-left:0px;
+ text-indent:0px;
+ direction:ltr
+}
+-->
+</style>
+</head>
+
+<body>
+
+<p align="center" style="text-align: center; margin-top: 0; margin-bottom: 0">
+<font size="2" face="Arial">
+<IMG width=245 height=50 style="display:block; float:none; text-align:center; vertical-align:top; direction:ltr; margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:17px" src="logo.gif">
+</font>
+</p>
+<HR>
+<DIV class="Part"
+><H1 style="text-align: center">
+<SPAN style="color:#000000; font-family:Arial; font-style:normal; font-weight:bold"
+><font size="2">AlstraSoft Affiliate Network Pro v9.2 Software Documentation
+</font> </SPAN
+></H1>
+</DIV>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0"><font size="2">
+    <span style="font-family: Arial; font-weight: 700">
+    &nbsp;Server Requirements</span></font></td>
+  </tr>
+  <tr>
+    <td width="100%">
+    <ol>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">PHP 4.1.0 or higher </font> </SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">MySQL (version 3.23 or higher) </font> </SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">MYSQL database </font> </SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">SSL (optional) </font> </SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Any of the following supported payment systems: Paypal, E-Gold, Stormpay, 
+      WorldPay and Authorize.net</font></SPAN
+></li>
+    </ol>
+    </td>
+  </tr>
+</table>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+<SPAN style="color:#000000; font-weight:700"
+> <font face="Arial" size="2">&nbsp;Installation Instructions </font> </SPAN
+></td>
+  </tr>
+  <tr>
+    <td width="100%">
+    <ol>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Unzip zip file and copy all the files to a folder named "affiliate".</font></SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">The SQL file (affiliatenetwork.sql) for the complete database can be found in the folder /SQL/.</font></SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Change the values for the variables ($db, $dbuser, $dbpass) to reflect the database name, database username and database password of your server (/ includes/constant.php).</font></SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Place the /partnerssecured folder into secured area, since it includes credit card validation page.
+      </font> </SPAN
+><font face="Arial" size="2"></LI>
+      </font></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Change the values for the variables ($track_site_url, $secured_site_url) to reflect the your site URL, secured site URL (path to /partnerssecured – but not including /partnerssecured ) in /includes/constant.php. For example, if the secured area URL is
+      </font> </SPAN
+><A href="https://www.yoursite.com/affiliate/partnerssecured">
+<SPAN style="font-weight:normal; color:#0000FF"
+><font face="Arial" size="2">https://www.yoursite.com/affiliate/partnerssecured</font></SPAN
+></A><font face="Arial" size="2"> </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">, please set the $secured_site_url = </font> </SPAN
+><A href="https://www.yoursite.com/affiliate/">
+<SPAN style="font-weight:normal; color:#0000FF"
+><font face="Arial" size="2">https://www.yoursite.com/affiliate/</font></SPAN
+></A><SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">.</font></SPAN
+></li>
+      <li>
+<span style="font-size: 10.0pt; font-family: Arial">A cron job has to be set 
+to run daily at a specified time for the file  dailyjobs_anp.php in the folder /cron.&nbsp; 
+This cron job is for the recurring commission and for the automatic update of 
+currency rates&nbsp; from XE.com. </span></li>
+      <li>
+<font size="2"><span style="font-family: Arial">Open the above file, </span>
+</font>
+<span style="font-size: 10.0pt; font-family: Arial">dailyjobs_anp.php and edit 
+the basepath setting on your site</span></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Set the permission of the following files and 
+      folders to 777 (Read, Write, Execute): </font> </SPAN
+></li>
+    </ol>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/includes</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-All files 
+    in /includes</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/admin/dump</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">
+    -/reports</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/admin/error.htm</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/admin/dbinfo.php</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/admin/mer_terms.htm</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/admin/terms.htm</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/images</font></p>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">-/images/uploads</font></p>
+    <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+    </td>
+  </tr>
+</table>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber3">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+    <SPAN style="color:#000000; font-weight:700"
+> <font face="Arial" size="2">&nbsp;Running The Software</font></SPAN
+></td>
+  </tr>
+  <tr>
+    <td width="100%">
+    <ol>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Admin Panel: </font> </SPAN
+><A href="http://www.yoursite.com/affiliate/admin">
+<SPAN style="font-weight:normal; color:#0000FF"
+><font face="Arial" size="2">http://www.yoursite.com/affiliate/admin</font></SPAN
+></A><font face="Arial" size="2"> </font>
+<SPAN style="font-weight:normal; color:#000000"
+> <font face="Arial" size="2">(Default admin username: admin, password: admin)
+      </font></SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Main page: </font> </SPAN
+><A href="http://www.yoursite.com/affiliate">
+<SPAN style="font-weight:normal; color:#0000FF"
+><font face="Arial" size="2">http://www.yoursite.com/affiliate</font></SPAN
+></A><font face="Arial" size="2"> </font></li>
+    </ol>
+    </td>
+  </tr>
+</table>
+
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber4">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+    <SPAN style="color:#000000"
+> <font face="Arial" size="2">&nbsp;</font><b><font face="Arial" size="2">Administrator Settings
+    </font></b> </SPAN
+></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<H2 style="text-align: left; margin-top: 0; margin-bottom: 0">
+&nbsp;</H2>
+<H2 style="text-align: left; margin-top: 0; margin-bottom: 0">
+<SPAN style="font-size:14pt; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal; font-weight:bold"
+><font face="Arial" size="2">1. Payment Settings (Admin&gt;&gt;Options&gt;&gt;Set 
+Payments)</font></SPAN
+></H2>
+<P style="margin-bottom:0; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">A</font><SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">) Change Subscription Amounts For Merchant</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-left:0px; line-height:26px; text-align:left">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">Set Normal Users subscription rate – Normal user can add only one affiliate program and associates ad-links.
+</font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-left:0px; line-height:26px; text-align:left">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">Set Advanced Users subscription rate -Advanced 
+user can add more than one affiliate program and associated ad-links. </font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">Membership payment Type - Set the payment to be one-time or 
+recurring for the above subscription rates</font></P>
+<P style="margin-bottom:0; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:62px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">B</font><SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">) Change Minimum Balance</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:62px; margin-left:0px; line-height:26px; text-align:left">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">Set Minimum Amount - i.e. minimum amount in a 
+merchant's account at any time for successful processing of transactions. </font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">C</font><SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">) Change Program Settings</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">Program Fee - Fee for each affiliate program created by the 
+merchant</font></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">Program Payment Type - Set the program fee to be one-time 
+or recurring</font></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">D) Change Transaction Amounts</font></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">Click Rate - </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">This will be the commission the admin will get 
+when a click occurs through the system.</font></SPAN
+><font face="Arial" size="2"> (example: if the click rate is set as $0.05, the admin 
+will get $0.05 which will be deducted from merchant's account balance for each 
+click.)</font></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">Lead Rate - </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">This will be the commission the admin will get 
+when a lead occurs through the system. </font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">Sale Rate - </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Set Sale rate (sale rate)- This will be the 
+commission the admin will get when a sale occurs through the system. (sale commission=sale rate*(actual sale amount)/100)
+</font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">E)&nbsp; Change Minimum Withdraw Amount Of Affiliates</font></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">Set Minimum Withdraw Amount - The min. amount affiliates 
+must have in their account before they can request for withdrawal</font></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<SPAN style="color:#000000; font-weight:700"
+> <font face="Arial" size="2">2. Change Amount Per Paid Mail </font> </SPAN
+><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">(Admin&gt;&gt;Options&gt;&gt;Admin mail)</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">A) Amount Per Mail - </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Set the amount for paid mail </font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">B) </font>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">Change Mail Header and Footer </font> </SPAN
+><SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">– Here the admin can change the common header and footer for each mail send through the system (options tab/Admin mail).
+</font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<b><font face="Arial" size="2">3. </font></b>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2"><b>Error Page Settings </b></font> </SPAN
+><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">(Admin&gt;&gt;Options)</font></SPAN
+><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2"> </font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">A) Set Error Page </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">– Set the error page displayed to the user when a transaction (fails for some reasons such as IP blocking (options tab).
+</font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<SPAN style="color:#000000; font-weight:700"
+> <font face="Arial" size="2">4. Category settings </font> </SPAN
+><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">(Admin&gt;&gt;Options&gt;&gt;Add or Remove Category)</font></SPAN
+><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2"> </font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">A) </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Set the categories such as computer, sports etc 
+so that merchants and affiliates can find their partners ,which helps in 
+increase their profits easily</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<b><font face="Arial" size="2">5. </font>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">Email Settings </font> </SPAN
+></b><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">(Admin&gt;&gt;Options&gt;&gt;Email Setup)</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">A) </font> </SPAN
+><SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Admin can setup emails for particular events. For eg: 
+At the time of User Registration</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<b><font face="Arial" size="2">6. </font>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">Events Enabled For Merchants (</font></SPAN
+></b><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">Admin&gt;&gt;Options&gt;&gt;</font></SPAN
+><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2">Events Enabled For Merchants)</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">A) Enable Mail Settings To Merchants </font>
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">– Merchant can also setup mails for their 
+affiliates. Admin can set which are all the events can be setup by merchant. In 
+this case only mails setup by merchant will be send to respective clients. Priority should be given to mails setup by merchant than mails setup by admin. But admin can restrict the events that can be setup by merchant through this tab.
+</font> </SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<b><font face="Arial" size="2">7. </font>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">Payment Gateway Settings (</font></SPAN
+></b><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">Admin&gt;&gt;Options&gt;&gt;</font></SPAN
+><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2">Gateways)</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">A) Admin has to set the correct details of his accounts (Paypal, Stormpay, E-gold, Authorize.net, 
+WorldPay etc...) so that money can be successfully transferred to his account whenever merchant pays through the system.</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<b><font face="Arial" size="2">8 Currencies Settings </font>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">(</font></SPAN
+></b><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">Admin&gt;&gt;Options&gt;&gt;</font></SPAN
+><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2">Currencies)</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">A) </font>
+<span style="font-size: 10.0pt; font-family: Arial">The Administrator can add 
+new currencies as well as changing the base currency and set relationship with 
+the base currency. The Administrator must be careful to enter the correct 
+Universally accepted code for each currency Added.&nbsp; The currency rate system 
+works based on the currency code.&nbsp; The Automatic updates of the currency rates 
+fro XE.com can be enabled or disabled by the Administrator.</span></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+&nbsp;</P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<b><font face="Arial" size="2">9. System Backup </font>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">(</font></SPAN
+></b><SPAN style="font-weight:700; color:#000000"
+><font face="Arial" size="2">Admin&gt;&gt;Options&gt;&gt;</font></SPAN
+><span style="font-weight: 700"><font face="Arial" size="2">Backup</font></span><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2">)</font></SPAN
+></P>
+<P style="margin-bottom:0; margin-right:25px; margin-left:0px; line-height:26px; text-align:left">
+<font face="Arial" size="2">A) Here the admin can create/restore/upload backup 
+database.</font></P>
+&nbsp;</td>
+  </tr>
+</table>
+
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber5">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+    <font size="2" face="Arial">&nbsp;</font><b><font size="2" face="Arial">Language Setup</font></b></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">If you want to include a new language, i.e. French to the site:
+    </font> </SPAN
+>
+    <ol>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+> <font face="Arial" size="2">Add language French through admin panel (options tab/languages).</font></SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+> <font face="Arial" size="2">Generate a French.php file for affiliates side (copy the /affiliates/lang/English.php and translate the contents into French and name the file as french.php) and place it on affiliates/lang folder.</font></SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+> <font face="Arial" size="2">Generate a French.php file for merchants side (copy the merchants/lang/English.php and translate the contents into French and name the file as french.php) and place it on /merchants/lang folder.</font></SPAN
+></li>
+      <li>
+<SPAN style="font-weight:normal; color:#000000"
+> <font face="Arial" size="2">Generate a French.php file for common parts for merchants and affiliates (copy the /lang/English.php and translate the contents into French and name the file as french. php) and place it on /lang folder.</font></SPAN
+></li>
+    </ol>
+    </td>
+  </tr>
+</table>
+
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber6">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+   <font size="2" face="Arial">&nbsp;</font><b><font size="2" face="Arial"> Modification of Site Design</font></b></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<H2 style="text-align:left; line-height:26px; margin-top:0; margin-bottom:0">
+<SPAN style="font-size:14pt; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal; font-weight:bold"
+><font face="Arial" size="2">1. Admin area :</font></SPAN
+></H2>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">You can get the entire structure of the Admin area from /admin/index.php file.</font></SPAN
+></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+&nbsp;</P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">There will be header.php & footer.php files at /admin/ folder. Change the content. Design will be reflected automatically at the admin area.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+&nbsp;</P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<b><font face="Arial" size="2">2. Affiliate Area :</font></b></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">You can get the entire structure of the affiliate side from /affiliate/index.php file.</font></SPAN
+></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px">
+&nbsp;</P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">There will be affiliates_header.php & footer.php files at /affiliates/ folder . Change the content. Design will be reflected automatically at the affiliate side.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px">
+&nbsp;</P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<b><font face="Arial" size="2">3. Merchant Area :</font></b></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">You can get the entire structure of the merchant side from /merchant/index.php file.</font></SPAN
+></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+&nbsp;</P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">There will be merchants_header.php & footer.php files at /merchants/ folder. Change the content. Design will be reflected automatically at the merchants area.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+&nbsp;</P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<b><font face="Arial" size="2">4. </font>
+<SPAN style="color:#000000"
+> <font face="Arial" size="2">User Login Area :</font></SPAN
+></b></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">You can get the entire structure of the affiliate side from /index.php file.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">There will be header.php & footer.php files. Change this files along with the following files to change the entire design of this side
+</font> </SPAN
+></P>
+<ol>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Home Page – body.php</font></SPAN
+></P>
+  </li>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Merchant - newmerchant.php, new_merchant_regi.php
+</font> </SPAN
+></P>
+  </li>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Affiliate - newaffiliate.php, new_affil_regi.php, 
+affil_regi.php </font> </SPAN
+></P>
+  </li>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Directory - newdirectory.php, directory_help.php
+</font> </SPAN
+></P>
+  </li>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Login - newlogin.php </font> </SPAN
+></P>
+  </li>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">About us - newabout.php </font> </SPAN
+></P>
+  </li>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">Contact us - newcontact.php </font> </SPAN
+></P>
+  </li>
+  <li>
+<P style="text-align:left; margin-bottom:0; margin-left:0px; line-height:26px; margin-top:0">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">money_empty_error.php 
+– This page will be displayed when a transaction leaves the merchant in a money 
+empty status and thus the transaction will not be processed. </font> </SPAN
+></P>
+  </li>
+</ol>
+</p>
+    <p></p>
+<p></p>
+<p></p>
+</p>
+&nbsp;</td>
+  </tr>
+</table>
+
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber7">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+    <font size="2" face="Arial">&nbsp;</font><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2">Customer Support</font></SPAN
+></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<SPAN style="font-weight:normal; color:#000000"
+><font face="Arial" size="2">If you need help installing or configuring your script, we offer professional installation for our software for a flat-fee of $30. If you require us to help you install our software on your server, feel free to email us at support@alstrasoft.com or use our online feedback form to send us an installation request.
+    </font> </SPAN
+></td>
+  </tr>
+</table>
+
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="AutoNumber8">
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+    <font size="2" face="Arial">&nbsp;</font><SPAN style="color:#000000; font-weight:700"
+><font face="Arial" size="2">License Agreement and Disclaimer</font></SPAN
+></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<P style="text-align:left; margin-bottom:43px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">AlstraSoft Affiliate Network Pro v9.2 Contact: </font> </SPAN
+>
+<A href="mailto:sales@alstrasoft.com" style="font-style: normal; font-weight: normal">
+<SPAN style="font-size:14pt; font-weight:normal; color:#0000FF; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">sales@alstrasoft.com </font> </SPAN
+></A>
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">AlstraSoft.com, Copyright 2003-2006 All rights reserved.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">1.THIS IS NOT FREE SOFTWARE If you have downloaded this software from a website other than 'www.AlstraSoft.com' or if you have otherwise received this software from someone who is not a representative of this organization you are involved in an illegal activity. The copying, distribution, installation and usage of this software without our consent is illegal. In order to help us continue the development and production of good software, we kindly ask for your collaboration. Please contact us at 'piracy@AlstraSoft.com' 
+and tell us where you got the software from.</font></SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">2.LICENSE AGREEMENT Do not run the AlstraSoft software on a site other than which they have been licensed for. Violation of this license agreement may void your right to receive support and subject you to legal action. You should carefully read the following terms and conditions before using this software. Unless you have a different license agreement signed by AlstraSoft, your use of this software indicates your acceptance of this license agreement and disclaimer of warranty.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">As a registered user, you may alter or modify the AlstraSoft Pro as far as the HTML output is concerned. Further modification of the script code requires written permission of the author (Just drop us a short note ). You cannot give anyone else permission to modify the AlstraSoft Pro Software. You are strictly prohibited from distributing copies of this software without prior permission. You are specifically prohibited from charging, or requesting donations, for any copies, however made, and from distributing the software and/or documentation with other products (commercial or otherwise) without prior written permission!
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">3.DISCLAIMER OF WARRANTY This software, the information, code and/or executables as well as the accompanying files provided are provided "as is" without warranty of any kind, either expressed or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. In no event shall the AlstraSoft be liable for any damages whatsoever including direct, indirect, incidental, consequential, loss of data, loss of business profits or special damages, even if the author or seller has been advised of the possibility of such damages. Good data processing procedure dictates that any program be thoroughly tested with non-critical data before relying on it. The user must assume the entire risk of using the program.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">4.LIMITED LIABILITY Unless otherwise expressly stated herein, AlstraSoft shall not be liable to Licensee for any consequential damages arising out of AlstraSoft breach of this Agreement.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">5.REPRESENTATIONS AND WARRANTIES AlstraSoft hereby represents and warrants to Licensee that A.Licensor is the owner of all right, title and interest, including copyright, in all the Licensed Materials, or has the authority to enter into this Agreement on behalf of the owner.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">B.AlstraSoft is fully aware of Licensee's business requirements and intended uses for the Software and the Software shall satisfy such requirements and is fit for such intended uses. </font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">C.AlstraSoft use of the Licensed Materials as authorized by this Agreement will not infringe any existing copyright, trade secret, patent or trademark rights of any third party. </font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-right:15px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">D.Licensee does not have the right to resell or transfer the ownership of the software (with or without a site) the licensee bought to a third party individual or a company. </font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:17px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">6.ATTORNEY FEES If any legal action is necessary to enforce this License, the prevailing party shall be entitled to reasonable attorney fees, costs and expenses in addition to any other relief to which it may be entitled.
+</font> </SPAN
+></P>
+<P style="text-align:left; margin-bottom:891px; margin-left:0px; line-height:26px">
+<SPAN style="font-size:14pt; font-weight:normal; color:#000000; font-family:Verdana,Verdana,sans-serif; font-style:normal"
+><font face="Arial" size="2">7.NOTICE All notices required or permitted to be 
+given by one party to the other under this Agreement shall be sufficient if sent 
+by certified mail, return receipt requested, to the parties at the respective 
+addresses set forth above or to such other address as the party to receive the 
+notice has designated by notice to the other party.</font></SPAN
+></P>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+</html>

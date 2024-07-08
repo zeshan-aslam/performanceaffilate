@@ -1,0 +1,113 @@
+     <section id="contact-us" class="contact-area section-big">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="section-title mb-60">
+                            <h2 class="featurette-heading f-neuton"><?=$lang_getintouch?></h2>
+                            <p><?=$lang_getintouch_msg?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--CONTACT Us starts-->
+            <div class="map-contact-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="contact-form">
+                                <!-- Submition status -->
+                                <div id="form-messages"></div>
+                                <form id="frmGetInTouch" action="" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group in_name">
+                                                <input type="text" name="Name" class="form-control" id="txtContactName" placeholder="Name" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group in_email">
+                                                <input type="email" name="Email" class="form-control" id="txtContactEmail" placeholder="E-mail" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group in_email">
+                                                <input type="text" name="Location" class="form-control" id="txtContactLocation" placeholder="Location" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="form-group in_email">
+                                                <input type="text" name="Address" class="form-control" id="txtContactAddress" placeholder="Address" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group in_message">
+                                                <textarea name="Message" class="form-control" id="txtContactMessage" rows="5" placeholder="Message" required="required"></textarea>
+                                            </div>
+                                        </div>
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<div class="g-recaptcha" data-sitekey="6LdChJsUAAAAAGhxAxN-HWzbZNBLkq41HQCEb1Tm"></div>
+											</div> 
+										</div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="actions text-center">
+                                                <input type="submit" value="Send Message" name="submit" id="contactSubmitButton" class="btn small" title="Submit Your Message!">
+                                            </div>
+                                            <div id="divContactMessage" class="text-center">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Contact form ends-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CONTACT Us ends-->
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="siteFooter">
+            <div class="container">
+                <p class="float-right">
+                    <a href="javascript:void(0);"  data-toggle="modal" data-target="#popPrivacyPolicy" >Privacy</a> 
+                    | <a href="javascript:void(0);"  data-toggle="modal" data-target="#popTerms" >Terms</a>
+                </p>
+                <p><?=$lang_copyright?></p>
+            </div>
+        </footer>
+
+        <?php require_once("modal_login.php"); ?>
+        <?php require_once("modal_gdpr.php"); ?>
+        <?php require_once("modal_privacypolicy.php"); ?>
+        <?php require_once("modal_termsconditions.php"); ?>
+
+    </main>
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script>
+        window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <script src="assets/js/vendor/jquery.easing.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script src="assets/js/vendor/jquery.validate.min.js"></script>
+    <script src="assets/js/vendor/jquery.form.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

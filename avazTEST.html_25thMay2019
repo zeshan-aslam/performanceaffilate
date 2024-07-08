@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Avaz Code Test</title>
+</head>
+
+<body>
+text link <br>
+<!-- START AVAZ Affiliate Network CODE -->
+<a href='https://avaz.co.uk/trackingcode.php?aid=7&linkid=N5&subid=789546213'>Select Test Type</a>
+<!-- END AVAZ Affiliate Network CODE -->				
+	<br>
+<br>
+Banner Link<br>
+<!-- START AVAZ Affiliate Network CODE -->
+<a href='https://avaz.co.uk/trackingcode.php?aid=7&linkid=B1&subid=1234567'>
+<img src='http://www.yceml.net/0/13217856-1530541269000.gif' border='0' />
+</a>
+<!-- END AVAZ Affiliate Network CODE -->					
+</body>
+</html>
